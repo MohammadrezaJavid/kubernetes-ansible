@@ -1,10 +1,10 @@
 ---
 
-# - ansible.builtin.include_tasks: disabling-swap.yml
-# - ansible.builtin.include_tasks: set-dns.yml
-# - ansible.builtin.include_tasks: update-system.yml
+- ansible.builtin.include_tasks: disabling-swap.yml
 - ansible.builtin.include_tasks: set-dns.yml
-# - ansible.builtin.include_tasks: add-configuration.yml
-# - ansible.builtin.include_tasks: install-containerd.yml
+- ansible.builtin.include_tasks: update-system.yml
+- ansible.builtin.include_tasks: set-dns.yml
+- ansible.builtin.include_tasks: add-configuration.yml
+- ansible.builtin.include_tasks: install-containerd.yml
 - ansible.builtin.include_tasks: install-kubeadm.yml
-# - ansible.builtin.include_tasks: initial-master.yml
+- ansible.builtin.include_tasks: initial-master.yml

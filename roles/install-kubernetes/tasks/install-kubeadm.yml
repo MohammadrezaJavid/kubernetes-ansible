@@ -1,0 +1,37 @@
+---
+
+- name: Download signing key for the Kubernetes package repositories
+  ansible.builtin.apt_key:
+    url: https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key
+    keyring: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+    state: present
+
+- name: Add the repository to Apt sources
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /"
+    filename: kubernetes
+    state: present
+
+- name: Update apt
+  ansible.builtin.apt:
+    update_cache: true
+    upgrade: dist
+    cache_valid_time: 3600
+
+- name: Install kubeadm, kubelet, kubectl
+  ansible.builtin.apt:
+    name:
+      - kubeadm
+      - kubectl
+      - kubelet
+    state: present
+    update_cache: true
+
+- name: Hold kubeadm, kubelet, kubectl package
+  ansible.builtin.shell: apt-mark hold kubelet kubeadm kubectl
+
+- name: restart and enabled kubelet
+  ansible.builtin.service:
+    name: kubelet
+    state: restarted
+    enabled: yes

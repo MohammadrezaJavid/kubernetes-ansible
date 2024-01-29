@@ -1,0 +1,12 @@
+---
+
+- name: updates and upgrade (apt)
+  ansible.builtin.apt:
+    cache_valid_time: 3600
+    update_cache: true
+    autoremove: true
+
+- name: reboot
+  ansible.builtin.reboot:
+
+...

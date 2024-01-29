@@ -1,0 +1,17 @@
+---
+
+- name: Delete old /etc/resolv.conf
+  file:
+    path: /etc/resolv.conf
+    state: absent
+  tags: [delete_file]
+
+- name: Config DNS NameServer
+  template:
+    src: etc/resolv.conf
+    dest: /etc/resolv.conf
+    owner: root
+    group: root
+    mode: 0644
+
+...

@@ -1,0 +1,9 @@
+---
+
+- ansible.builtin.include_tasks: create-ssh-key.yml
+
+- ansible.builtin.include_tasks: add-authorized-key.yml
+  vars:
+   ansible_become: yes
+
+...

@@ -1,0 +1,10 @@
+---
+
+- name: Add authorized key
+  ansible.posix.authorized_key:
+    user: debian
+    state: present
+    key: "{{ lookup('file', '~/.ssh/ansible.pub') }}"
+  when: "'localhost' not in inventory_hostname"
+
+...

@@ -1,0 +1,12 @@
+---
+
+- name: Copy join command from AnsibleController to Worker nodes
+  ansible.builtin.copy:
+    src: /tmp/kubernetes_join_command
+    dest: /tmp/kubernetes_join_command
+    mode: 0777
+  when: "'master.jlinux.ir' not in inventory_hostname"
+
+- name: Join Worker nodes to master
+  ansible.builtin.command: sh /tmp/kubernetes_join_command
+  when: "'master.jlinux.ir' not in inventory_hostname"

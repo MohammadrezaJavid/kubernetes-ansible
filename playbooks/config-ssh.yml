@@ -1,0 +1,7 @@
+---
+
+- hosts: HOSTS_CNFIG_SSH
+  roles:
+    - config-ssh
+
+...
